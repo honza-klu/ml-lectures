@@ -1,5 +1,5 @@
 from instance import Instance
-class KNN:
+class Knn:
     def __init__(self):
         self.train = []
         pass
