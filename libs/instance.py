@@ -10,14 +10,10 @@ class Instance:
 #    def __str__(self):
 #        ret = "%s %s" % (str(x), str(y),)
 #        return ret
-    
-def plot_instances(instances, alpha=1):
+
+basic_format = 'x' #x
+def _plot_points(instances, alpha, ms=5):
     srt = {}
-    basic_format = 'x' #x
-    plt.axis([-1, 1, -1, 1])
-    plt.grid(True)
-    plt.xlabel('X_1')
-    plt.ylabel('X_2')
     for i in instances:
         if not i.y in srt:
             srt[i.y] = []
@@ -26,10 +22,22 @@ def plot_instances(instances, alpha=1):
     for cls in srt.keys():
         idx = idx + 1
         frm = basic_format
-        clr = matplotlib.colors.to_rgba(PALETE[idx%len(PALETE)], alpha)
+        clr = matplotlib.colors.to_rgba(PALETE[cls%len(PALETE)], alpha)
         x0 = [x.x[0] for x in srt[cls]]
         x1 = [x.x[1] for x in srt[cls]]
-        plt.plot(x0, x1, frm, color=clr)
+        plt.plot(x0, x1, frm, color=clr, markersize=ms)
         plt.title(cls)
+        
+def plot_instances(instances, alpha=1, map_instances=None, map_alpha=0.2, highlight=None):
+    plt.axis([-1, 1, -1, 1])
+    plt.grid(True)
+    plt.xlabel('X_1')
+    plt.ylabel('X_2')
+    #instances
+    _plot_points(instances, alpha)
+    if map_instances:
+        _plot_points(map_instances, map_alpha)
+    if highlight:
+        _plot_points([highlight], 1.0, ms=15)
     plt.show()
     
