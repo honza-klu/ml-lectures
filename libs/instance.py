@@ -28,8 +28,9 @@ def _plot_points(instances, alpha, ms=5):
         plt.plot(x0, x1, frm, color=clr, markersize=ms)
         plt.title(cls)
         
-def plot_instances(instances, alpha=1, map_instances=None, map_alpha=0.2, highlight=None):
-    plt.axis([-1, 1, -1, 1])
+def plot_instances(instances, alpha=1, map_instances=None, map_alpha=0.2, highlight=None, axis=None):
+    if(axis==None):
+        plt.axis([-1, 1, -1, 1])
     plt.grid(True)
     plt.xlabel('X_1')
     plt.ylabel('X_2')
